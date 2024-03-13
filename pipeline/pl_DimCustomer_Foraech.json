@@ -91,7 +91,13 @@
 							"inputs": [
 								{
 									"referenceName": "ds_adls_parameter_customer",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"FileName": {
+											"value": "@item().Name",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
