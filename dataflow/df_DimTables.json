@@ -33,19 +33,11 @@
 					"name": "ProductCategory"
 				},
 				{
-					"dataset": {
-						"referenceName": "ds_SynapseAnalytics_DimCustomer_ADF",
-						"type": "DatasetReference"
-					},
 					"name": "DimCustomerSynapse"
 				}
 			],
 			"sinks": [
 				{
-					"dataset": {
-						"referenceName": "ds_SynapseAnalytics_DimCustomer_ADF",
-						"type": "DatasetReference"
-					},
 					"name": "synapseDimcustomeradf"
 				},
 				{
@@ -151,11 +143,7 @@
 				"          CustomerSK as integer",
 				"     ),",
 				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     query: 'SELECT MAX([CustomerSK]) as CustomerSK FROM [dbo].[adf_DimCustomer]',",
-				"     format: 'query',",
-				"     staged: true) ~> DimCustomerSynapse",
+				"     validateSchema: false) ~> DimCustomerSynapse",
 				"Product, ProductModel join(Product@ProductModelID == ProductModel@ProductModelID,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
@@ -192,28 +180,15 @@
 				"CustomerSKKey derive(CustomerSK = CustomerSK + CustomerSKSink#outputs()[1].CustomerSK) ~> CustomerSKKeyUpdated",
 				"CustomerSKKeyUpdated sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     input(",
-				"          CustomerSK as integer,",
-				"          CustomerID as integer,",
-				"          CompanyName as string,",
-				"          SalesPerson as string",
-				"     ),",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     format: 'table',",
-				"     staged: true,",
-				"     allowCopyCommand: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
 				"          CustomerSK,",
 				"          CustomerID,",
 				"          CompanyName,",
 				"          SalesPerson",
-				"     )) ~> synapseDimcustomeradf",
+				"     ),",
+				"     format: 'table') ~> synapseDimcustomeradf",
 				"ProduckSKKey sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
