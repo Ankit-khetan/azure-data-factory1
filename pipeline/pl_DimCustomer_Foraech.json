@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Get Metadata for DimCustomer",
+				"name": "Get Metadata for DimCustomers",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
