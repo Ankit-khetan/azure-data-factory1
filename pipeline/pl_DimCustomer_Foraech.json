@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Get Metadata for DimCustomer",
+				"name": "Get Metadata for DimCustomers",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -33,11 +33,11 @@
 				}
 			},
 			{
-				"name": "ForEachFile in Dim Customers",
+				"name": "ForEach file as Child item",
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Get Metadata for DimCustomer",
+						"activity": "Get Metadata for DimCustomers",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -46,12 +46,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Get Metadata for DimCustomer').output.childItems",
+						"value": "@activity('Get Metadata for DimCustomers').output.childItems",
 						"type": "Expression"
 					},
 					"activities": [
 						{
-							"name": "Copy Customer Files",
+							"name": "Copy data from Dim customer",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -76,18 +76,9 @@
 								},
 								"sink": {
 									"type": "SqlDWSink",
-									"writeBehavior": "Insert",
-									"sqlWriterUseTableLock": false
+									"allowCopyCommand": true
 								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
-									}
-								}
+								"enableStaging": false
 							},
 							"inputs": [
 								{
@@ -112,6 +103,8 @@
 				}
 			}
 		],
-		"annotations": []
-	}
+		"annotations": [],
+		"lastPublishTime": "2024-03-13T14:00:16Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }
