@@ -1,0 +1,16 @@
+{
+	"name": "ds_synapse_DimCustomer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_synapse_ppoldb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "adf_DimCustomer"
+		}
+	}
+}

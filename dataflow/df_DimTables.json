@@ -33,11 +33,19 @@
 					"name": "ProductCategory"
 				},
 				{
+					"dataset": {
+						"referenceName": "ds_synapse_DimCustomer",
+						"type": "DatasetReference"
+					},
 					"name": "DimCustomerSynapse"
 				}
 			],
 			"sinks": [
 				{
+					"dataset": {
+						"referenceName": "ds_synapse_DimCustomer",
+						"type": "DatasetReference"
+					},
 					"name": "synapseDimcustomeradf"
 				},
 				{
@@ -139,11 +147,11 @@
 				"     validateSchema: false,",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> ProductCategory",
-				"source(output(",
-				"          CustomerSK as integer",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false) ~> DimCustomerSynapse",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table',",
+				"     staged: true) ~> DimCustomerSynapse",
 				"Product, ProductModel join(Product@ProductModelID == ProductModel@ProductModelID,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
@@ -180,15 +188,21 @@
 				"CustomerSKKey derive(CustomerSK = CustomerSK + CustomerSKSink#outputs()[1].CustomerSK) ~> CustomerSKKeyUpdated",
 				"CustomerSKKeyUpdated sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
 				"          CustomerSK,",
 				"          CustomerID,",
 				"          CompanyName,",
 				"          SalesPerson",
-				"     ),",
-				"     format: 'table') ~> synapseDimcustomeradf",
+				"     )) ~> synapseDimcustomeradf",
 				"ProduckSKKey sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
