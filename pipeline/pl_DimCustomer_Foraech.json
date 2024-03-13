@@ -76,17 +76,9 @@
 								},
 								"sink": {
 									"type": "SqlDWSink",
-									"writeBehavior": "Insert"
+									"allowCopyCommand": true
 								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
-									}
-								}
+								"enableStaging": false
 							},
 							"inputs": [
 								{
@@ -102,7 +94,7 @@
 							],
 							"outputs": [
 								{
-									"referenceName": "ds_synapse_DimCustomer_ForEach",
+									"referenceName": "ds_synapse_1_dimCustomer_ForEach",
 									"type": "DatasetReference"
 								}
 							]
