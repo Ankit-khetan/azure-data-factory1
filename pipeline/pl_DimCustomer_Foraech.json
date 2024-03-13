@@ -31,87 +31,10 @@
 						"type": "DelimitedTextReadSettings"
 					}
 				}
-			},
-			{
-				"name": "ForEachFile in Dim Customers",
-				"type": "ForEach",
-				"dependsOn": [
-					{
-						"activity": "Get Metadata for DimCustomer",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"items": {
-						"value": "@activity('Get Metadata for DimCustomer').output.childItems",
-						"type": "Expression"
-					},
-					"activities": [
-						{
-							"name": "Copy Customer Files",
-							"type": "Copy",
-							"dependsOn": [],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"source": {
-									"type": "DelimitedTextSource",
-									"storeSettings": {
-										"type": "AzureBlobFSReadSettings",
-										"recursive": true,
-										"enablePartitionDiscovery": false
-									},
-									"formatSettings": {
-										"type": "DelimitedTextReadSettings"
-									}
-								},
-								"sink": {
-									"type": "SqlDWSink",
-									"writeBehavior": "Insert",
-									"sqlWriterUseTableLock": false
-								},
-								"enableStaging": false,
-								"translator": {
-									"type": "TabularTranslator",
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
-									}
-								}
-							},
-							"inputs": [
-								{
-									"referenceName": "ds_adls_DimCustomer_parameter",
-									"type": "DatasetReference",
-									"parameters": {
-										"FileName": {
-											"value": "@item().Name",
-											"type": "Expression"
-										}
-									}
-								}
-							],
-							"outputs": [
-								{
-									"referenceName": "ds_synapse_DimCustomer_ForEach",
-									"type": "DatasetReference"
-								}
-							]
-						}
-					]
-				}
 			}
 		],
-		"annotations": []
-	}
+		"annotations": [],
+		"lastPublishTime": "2024-03-13T14:00:16Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
 }
