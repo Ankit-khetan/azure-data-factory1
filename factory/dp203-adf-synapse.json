@@ -1,0 +1,9 @@
+{
+	"name": "dp203-adf-synapse",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c9ecb2d7-1c87-480c-9a60-bfdef54f120d",
+		"tenantId": "adb53b4f-b05f-4dcb-a2e1-9111380568c3"
+	}
+}

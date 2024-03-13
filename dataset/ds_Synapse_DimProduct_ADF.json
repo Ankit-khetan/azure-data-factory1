@@ -1,0 +1,50 @@
+{
+	"name": "ds_Synapse_DimProduct_ADF",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_synapse_ppoldb",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "ProductSK",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ProductID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ProductModelID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ProductcategoryID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ProductName",
+				"type": "varchar"
+			},
+			{
+				"name": "ProductModelName",
+				"type": "varchar"
+			},
+			{
+				"name": "ProductCategoryName",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "adf_DimProduct"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
