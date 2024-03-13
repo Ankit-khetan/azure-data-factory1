@@ -8,6 +8,12 @@
 		"ls_adls_dltestgen2_accountKey": {
 			"value": ""
 		},
+		"ls_azure_sql_db_connectionString": {
+			"value": ""
+		},
+		"ls_synapse_ppoldb_connectionString": {
+			"value": ""
+		},
 		"ls_adls_dltestgen2_properties_typeProperties_url": {
 			"value": "https://dltestgen2.dfs.core.windows.net/"
 		},
