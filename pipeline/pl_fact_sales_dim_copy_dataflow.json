@@ -48,10 +48,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "df_DimTables",
-						"type": "DataFlowReference"
-					},
 					"staging": {
 						"linkedService": {
 							"referenceName": "ls_adls_dltestgen2",
